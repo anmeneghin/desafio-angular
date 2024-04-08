@@ -1,0 +1,31 @@
+.card-home {
+  border-radius: 6px;
+}
+
+.card {
+  margin-bottom: 1.875rem;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 10px 40px 0 rgba(62, 57, 107, .07), 0 2px 9px 0 rgba(62, 57, 107, .06);
+
+  .card-title {
+    font-weight: 500;
+    letter-spacing: .05rem;
+  }
+}
+
+
+
+
+
+.btn-cadastrar {
+  background-color: #00b5b8;
+  border-color: #00B5B8;
+  color: #FFF;
+
+  &:hover {
+    border-color: #009C9F !important;
+    background-color: #00CED2 !important;
+    color: #FFF !important;
+  }
+}

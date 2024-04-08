@@ -1,0 +1,33 @@
+<app-sidebar (openSidebar)="openSidebar($event)"></app-sidebar>
+<nav class="navbar navbar-expand-sm">
+  <div class="w-100 d-flex align-items-center justify-content-end">
+    <ul class="navbar-nav me-4">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <i class="fa-solid fa-user-tie"></i>
+          <span class="ms-2">{{ usuarioLogado.nome }} </span>
+        </a>
+        <ul class="dropdown-menu w-auto me-4">
+          <li>
+            <a class="dropdown-item" (click)="onLogoff()"
+              ><i class="fa-solid fa-power-off"></i>
+              <span class="ms-3">Sair</span></a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main class="main" [class.sidebar-open]="sidebarOpen()">
+  <div class="d-flex justify-content-center align-items-center mt-2 mb-5">
+    <img class="logo" src="assets/icons/iot.png" alt="" />
+    <h3 class="ms-3 mb-0">Community IoT Device (CIoTD)</h3>
+  </div>
+
+  <app-listagem></app-listagem>
+</main>

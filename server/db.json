@@ -1,0 +1,65 @@
+{
+  "DeviceList": {
+    "items": [{ "deviceId": "cdd3c409-b756-4c2f-9403-b94ac148fa22" }]
+  },
+  "Device": [
+    {
+      "id": "cdd3c409-b756-4c2f-9403-b94ac148fa22",
+      "identifier": "json-server",
+      "description": "typicode",
+      "manufacturer": "",
+      "url": "",
+      "commands": [
+        { "commandDescriptionId": "ad488477-0818-4fb3-8921-744ba9dd4fc1" },
+        { "commandDescriptionId": "0b9ed932-6ede-487b-b83b-beee4634cadb" }
+      ]
+    }
+  ],
+  "CommandDescription": [
+    {
+      "id": "ad488477-0818-4fb3-8921-744ba9dd4fc1",
+      "operation": "Operação 1",
+      "description": "CommandDescription 1",
+      "command": { "commandId": "59baf07a-f9ef-4e1d-aa10-50c036645f07" },
+      "result": "Result 1",
+      "format": "Formato 1"
+    },
+    {
+      "id": "0b9ed932-6ede-487b-b83b-beee4634cadb",
+      "operation": "Operação 2",
+      "description": "CommandDescription 2",
+      "command": { "commandId": "bf10d99c-3391-47c1-9363-a5577a21994a" },
+      "result": "Result 2",
+      "format": "Formato 2"
+    }
+  ],
+  "Command": [
+    {
+      "id": "59baf07a-f9ef-4e1d-aa10-50c036645f07",
+      "command": "Comando 1",
+      "description": "Comando 1 description",
+      "parameters": [
+        { "parameterId": "2749c8f9-f947-488c-8104-853e7853b608" },
+        { "parameterId": "f1ba74e2-a894-4402-8030-b05434241219" }
+      ]
+    },
+    {
+      "id": "bf10d99c-3391-47c1-9363-a5577a21994a",
+      "command": "Comando 2",
+      "description": "Comando 2 description",
+      "parameters": [{ "parameterId": "f1ba74e2-a894-4402-8030-b05434241219" }]
+    }
+  ],
+  "Parameter": [
+    {
+      "id": "2749c8f9-f947-488c-8104-853e7853b608",
+      "name": "Parameter 1",
+      "description": "Parameter 1 description"
+    },
+    {
+      "id": "f1ba74e2-a894-4402-8030-b05434241219",
+      "name": "Parameter 2",
+      "description": "Parameter 2 description"
+    }
+  ]
+}

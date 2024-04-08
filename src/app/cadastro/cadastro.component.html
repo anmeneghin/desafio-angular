@@ -1,0 +1,133 @@
+@if (open()) {
+  <div class="modal-backdrop fade show" [style.backgroundColor]="'black'"></div>
+  <div
+    #modal
+    class="modal fade"
+    [ngClass]="open() ? 'show d-block' : 'hidden d-none'">
+    <div
+      class="modal-dialog modal-lg modal-dialog border-0 modal-fullscreen-sm-down modal-fullscreen-md-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fa-stack fa-1x icon-header">
+              <i class="circle-primary fas fa-circle fa-stack-2x"></i>
+              <i class="icone-primary fas fa-plus fa-stack-1x fa-inverse"></i>
+            </span>
+            <h3 class="modal-title ml-1" id="modal-basic-title">Cadastrar</h3>
+          </div>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="closeModal(false)"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="deviceForm" class="mt-3">
+            <div class="form-floating w-100 mb-3">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="identifier"
+                placeholder="Nome"
+                [ngClass]="{
+                  'is-invalid': isInputValid('identifier', 'deviceForm')
+                }" />
+              <label class="label-input" for="name">Nome</label>
+              <div class="invalid-feedback">O campo nome é obrigatório!</div>
+            </div>
+            <div class="form-floating w-100 mb-3">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="description"
+                placeholder="Descrição"
+                [ngClass]="{
+                  'is-invalid': isInputValid('description', 'loginForm')
+                }" />
+              <label class="label-input" for="name">Descrição</label>
+              <div class="invalid-feedback">
+                O campo descrição é obrigatório!
+              </div>
+            </div>
+            <div class="form-floating w-100 mb-3">
+              <input
+                class="form-control"
+                type="text"
+                name="manufacturer"
+                formControlName="manufacturer"
+                placeholder="Fabricante"
+                [ngClass]="{
+                  'is-invalid': isInputValid('manufacturer', 'loginForm')
+                }" />
+              <label class="label-input" for="name">Fabricante</label>
+              <div class="invalid-feedback">
+                O campo fabricante é obrigatório!
+              </div>
+            </div>
+            <div class="form-floating w-100 mb-3">
+              <input
+                class="form-control"
+                type="text"
+                name="url"
+                formControlName="url"
+                placeholder="Url"
+                [ngClass]="{
+                  'is-invalid': isInputValid('url', 'loginForm')
+                }" />
+              <label class="label-input" for="name">Url</label>
+              <div class="invalid-feedback">O campo url é obrigatório!</div>
+            </div>
+            @if (commandDescription(); as comandos) {
+              <div class="form-floating">
+                <select class="form-select" (click)="adicionaComando($event)">
+                  <option selected>Selecione um comando</option>
+                  @for (comando of comandos; track $index) {
+                    <option value="{{ comando.id }}">
+                      {{ comando.description }}
+                    </option>
+                  }
+                </select>
+                <label for="floatingSelect">Comandos</label>
+              </div>
+
+              @if (comandosSelecionados) {
+                <div class="mt-4">
+                  <ul class="list-group list-group-flush">
+                    @for (item of comandosSelecionados; track $index) {
+                      <li
+                        class="list-group-item d-flex align-items-center justify-content-between">
+                        <span>{{ item.description }}</span>
+                        <a (click)="removeComando($index)">
+                          <i class="fa-solid fa-xmark"></i
+                        ></a>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              }
+            }
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+            (click)="closeModal(false)">
+            <i class="fa-solid fa-xmark"></i>
+            <span class="ms-2">Cancelar</span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            [disabled]="deviceForm.invalid"
+            (click)="cadastrar()">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span class="ms-2">Cadastrar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

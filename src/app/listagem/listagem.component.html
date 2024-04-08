@@ -1,0 +1,111 @@
+<div class="d-flex">
+  <div class="card card-home w-100 px-4 py-3">
+    <h4 class="card-title">Devices</h4>
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <app-filtro
+          class="flex-grow-1"
+          (changeFiltro)="onChangeFiltro($event)"></app-filtro>
+        <button
+          class="btn btn-cadastrar flex-grow-2 ms-2"
+          (click)="open('Cadastrar', 'fa-light fa-plus', true, undefined)">
+          <i class="fas fa-plus"></i>
+          <span class="hidden-mobile ms-2"> Cadastrar </span>
+        </button>
+      </div>
+
+      <div class="tabela-radius d-none d-sm-block mt-4">
+        @defer (when devices()) {
+          <app-lista [itens]="devices()">
+            <ng-template #thead>
+              <th class="text-center fw-medium">
+                <a [appSort]="'description'" (sort)="onSort($event)">
+                  Descrição
+                </a>
+              </th>
+              <th class="text-center fw-medium">
+                <a [appSort]="'manufacturer'" (sort)="onSort($event)">
+                  Fabricante
+                </a>
+              </th>
+              <th class="col-1 text-center border-acoes fw-medium"></th>
+            </ng-template>
+            <ng-template #tbody let-devices>
+              <td
+                class="text-center"
+                [tooltip]="devices.item.description"
+                placement="top"
+                [margin]="-5"
+                [backgroundColor]="'#00b5b8'"
+                [color]="'#ffffff'">
+                <span>{{ devices.item.description }}</span>
+              </td>
+              <td
+                class="text-center"
+                [tooltip]="'devices.item.manufacturer'"
+                placement="top"
+                [margin]="-5"
+                [backgroundColor]="'#00b5b8'"
+                [color]="'#ffffff'">
+                <span>
+                  {{ devices.item.manufacturer }}
+                </span>
+              </td>
+              <td class="col-1 text-center border-acoes botoes-acoes">
+                <div class="d-flex justify-content-center">
+                  <a
+                    [tooltip]="'Editar'"
+                    placement="left"
+                    [margin]="-5"
+                    [backgroundColor]="'#00b5b8'"
+                    [color]="'#ffffff'"
+                    class="fa-stack fa-1x btn-editar">
+                    <i class="fas fa-circle fa-stack-2x icone-primary"></i>
+                    <i class="fas fa-edit fa-stack-1x fa-inverse"></i>
+                  </a>
+                  <a
+                    [tooltip]="'Excluir'"
+                    placement="left"
+                    [margin]="-5"
+                    [backgroundColor]="'#00b5b8'"
+                    [color]="'#ffffff'"
+                    (click)="excluir(devices, true)">
+                    <span
+                      [ngClass]="
+                        devices.item.avaliacaoId !== '' ? 'disabled' : ''
+                      "
+                      class="fa-stack fa-1x btn-deletar">
+                      <i class="fas fa-circle fa-stack-2x icone-danger"></i>
+                      <i class="fas fa-trash-alt fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </ng-template>
+          </app-lista>
+        }
+      </div>
+      @defer (when itensPorPagina().length > 0) {
+        <div class="d-block align-items-stretch mt-3">
+          <div class="d-flex justify-content-between align-itens-center">
+            <app-itens-por-pagina
+              [qntPorPagina]="fetchParametros().limite"
+              [itensPorPagina]="itensPorPagina()"
+              (qtdItensPorPagina)="
+                onChangeItensPorPagina($event)
+              "></app-itens-por-pagina>
+            <app-paginacao
+              [pagina]="dispositivoPagina()"
+              (selectedPagina)="onSelectPagina($event)"></app-paginacao>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+@if (modalCadastro(); as modalCadastro) {
+  <app-cadastro
+    [abrirModal]="modalCadastro"
+    (fecharModal)="onFecharModal($event)"></app-cadastro>
+}

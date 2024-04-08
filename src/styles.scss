@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.custom-tooltip {
+  --bs-tooltip-bg: #00b5b8;
+  --bs-tooltip-color: var(--bs-white);
+}
+
+.icone-danger {
+  color: rgb(229, 60, 83);
+}
+
+.icone-primary {
+  color: #00b5b8;
+}
+
+.circle-primary {
+  color: #00b5b8;
+  opacity: 0.2;
+}
+
+.circle-danger {
+  color: #00b5b8;
+  opacity: 0.2;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  background-color: #00b5b8;
+  border-color: #00B5B8;
+  color: #FFF;
+
+  &:hover {
+    border-color: #009C9F !important;
+    background-color: #00CED2 !important;
+    color: #FFF !important;
+  }
+}

@@ -1,0 +1,46 @@
+.main {
+  padding: 24px;
+
+  margin-left: 78px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s ease;
+
+  &.sidebar-open {
+    margin-left: 342px;
+  }
+
+  .logo {
+    width: 3rem;
+  }
+}
+
+.navbar {
+  background-color: #404E67;
+}
+
+.nav-link,
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: #DCDCDC;
+}
+
+.dropdown-item {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 1400px) {
+  .main.sidebar-open {
+    margin-left: 256px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main {
+    margin-left: 0 !important;
+    width: 100vw;
+  }
+}
