@@ -30,10 +30,16 @@ import { filter, map, tap } from "rxjs";
 import { Device } from "../interfaces/device";
 import { UsuarioLogado } from "../interfaces/usuarioLogado";
 import { v4 as uuidv4 } from "uuid";
+import { ConfirmacaoEnvioComponent } from "../confirmacao-envio/confirmacao-envio.component";
 @Component({
   selector: "app-cadastro",
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ConfirmacaoEnvioComponent,
+  ],
   templateUrl: "./cadastro.component.html",
   styleUrl: "./cadastro.component.scss",
 })
@@ -49,7 +55,6 @@ export class CadastroComponent {
   showOverlay = false;
 
   modal = viewChild<ElementRef<HTMLDivElement>>("modal");
-  // novoCadastroService = inject(NovoCadastroService);
 
   modalConfirmacao = signal<boolean>(false);
   commandDescription = signal<CommandDescription[]>([]);
@@ -60,47 +65,6 @@ export class CadastroComponent {
   tipoModalConfirmacao!: string;
 
   disabled = false;
-
-  @HostListener("click", ["$event"]) onClick($event: Event) {
-    if (this.modal && $event.target == this.modal()?.nativeElement) {
-      this.closeModal(false);
-    }
-  }
-
-  constructor(@Inject(DOCUMENT) private document: Document) {
-    const localStorage = document.defaultView?.localStorage;
-
-    if (localStorage) {
-      const localUser = localStorage.getItem("usuarioLogado");
-      if (localUser != null) {
-        this.usuarioLogado = JSON.parse(localUser);
-      }
-    }
-    effect(
-      () => {
-        this.open.set(this.abrirModal());
-        console.log(this.open());
-      },
-      {
-        allowSignalWrites: true,
-      }
-    );
-
-    effect(() => {
-      this.deviceService
-        .listarDescricaoComandos()
-        .pipe(
-          filter(res => res.status === 200),
-          map(res => res.body),
-          tap(comandos => {
-            if (comandos) {
-              this.commandDescription.set(comandos);
-            }
-          })
-        )
-        .subscribe();
-    });
-  }
 
   deviceForm = new FormGroup({
     identifier: new FormControl<string>("", {
@@ -138,6 +102,46 @@ export class CadastroComponent {
     return this.deviceForm.get("commands") as FormArray;
   }
 
+  @HostListener("click", ["$event"]) onClick($event: Event) {
+    if (this.modal && $event.target == this.modal()?.nativeElement) {
+      this.closeModal(false);
+    }
+  }
+
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    const localStorage = document.defaultView?.localStorage;
+
+    if (localStorage) {
+      const localUser = localStorage.getItem("usuarioLogado");
+      if (localUser != null) {
+        this.usuarioLogado = JSON.parse(localUser);
+      }
+    }
+    effect(
+      () => {
+        this.open.set(this.abrirModal());
+      },
+      {
+        allowSignalWrites: true,
+      }
+    );
+
+    effect(() => {
+      this.deviceService
+        .listarDescricaoComandos()
+        .pipe(
+          filter(res => res.status === 200),
+          map(res => res.body),
+          tap(comandos => {
+            if (comandos) {
+              this.commandDescription.set(comandos);
+            }
+          })
+        )
+        .subscribe();
+    });
+  }
+
   closeModal($event: boolean) {
     this.open.set($event);
     this.fecharModal.emit($event);
@@ -150,21 +154,20 @@ export class CadastroComponent {
   }
 
   cadastrar(): void {
-    const devices: Device = {
+    const device: Device = {
       id: uuidv4(),
       ...this.deviceForm.getRawValue(),
       owner: this.usuarioLogado.email,
     };
-    console.log(devices);
 
-    if (devices) {
+    if (device) {
       this.deviceService
-        .adicionarDispositivos(devices)
+        .adicionarDispositivos(device)
         .pipe(
           tap({
             next: () => {
               this.mostrarModalConfirmacao(
-                "Dispositivo cadastrado com sucesso",
+                "Dispositivo cadastrado com sucesso!",
                 true,
                 "sucesso-concluido"
               );
@@ -181,9 +184,7 @@ export class CadastroComponent {
   adicionaComando(event: Event) {
     const target = event.target as HTMLInputElement;
     const idSelected = target?.value;
-
     const comando = this.commandDescription()?.find(i => i.id === idSelected);
-    console.log(comando);
 
     if (comando) {
       this.comandosSelecionados.push(comando);

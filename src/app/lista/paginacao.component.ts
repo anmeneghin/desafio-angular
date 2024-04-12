@@ -77,8 +77,7 @@ import { PaginacaoPagina } from "./paginacao-pagina";
 
               a.page-link:hover {
                 color: rgb(33, 34, 38);
-                background-color: rgb(209, 215, 255);
-                border-color: rgb(209, 215, 255);
+                background-color: #c5e9e9;
                 border-radius: 6px;
                 cursor: pointer;
               }

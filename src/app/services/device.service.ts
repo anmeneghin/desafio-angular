@@ -54,4 +54,17 @@ export class DeviceService {
   adicionarDispositivos(questionario: Device): Observable<Device> {
     return this.httpService.post<Device>(this.API_DEVICE, questionario);
   }
+
+  editarDispositivo(questionario: Device): Observable<Device> {
+    return this.httpService.put<Device>(
+      `${this.API_DEVICE}/${questionario.id}`,
+      questionario
+    );
+  }
+
+  excluirDispositivo(questionario: Device): Observable<Device> {
+    return this.httpService.delete<Device>(
+      `${this.API_DEVICE}/${questionario.id}`
+    );
+  }
 }

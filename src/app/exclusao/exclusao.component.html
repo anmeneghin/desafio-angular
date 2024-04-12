@@ -1,1 +1,65 @@
-<p>exclusao works!</p>
+@if (open()) {
+  <div class="modal-backdrop fade show" [style.backgroundColor]="'black'"></div>
+  <div
+    #modal
+    class="modal fade"
+    [ngClass]="open() ? 'show d-block' : 'hidden d-none'">
+    <div
+      class="modal-dialog modal-lg modal-dialog-centered border-0 modal-fullscreen-sm-down modal-fullscreen-md-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fa-stack fa-1x icon-header">
+              <i class="circle-danger fas fa-circle fa-stack-2x"></i>
+              <i
+                class="icone-danger fas fa-trash-alt fa-stack-1x fa-inverse"></i>
+            </span>
+            <h3 class="modal-title ms-2" id="modal-basic-title">Excluir</h3>
+          </div>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="closeModal(false)"></button>
+        </div>
+        <div class="modal-body modal-body-form px-5">
+          @if (!owner()) {
+            <div class="alert alert-primary" role="alert">
+              A solicitação não foi realizada pelo proprietário do dispositivo.
+            </div>
+          } @else {
+            Tem certeza que deseja excluir este dispositivo?
+          }
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+            (click)="closeModal(false)">
+            <i class="fa-solid fa-xmark"></i>
+            <span class="ms-2">Cancelar</span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            [disabled]="!owner()"
+            (click)="excluir()">
+            <i class="fa-solid fa-trash-alt"></i>
+            <span class="ms-2">Excluir</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+@if (modalConfirmacao()) {
+  <app-confirmacao-envio
+    [open]="modalConfirmacao()"
+    [mensagem]="mensagemModalConfirmacao"
+    [tipoModal]="tipoModalConfirmacao"
+    (fecharModal)="closeModal($event)">
+  </app-confirmacao-envio>
+}

@@ -1,0 +1,19 @@
+.list-group-item {
+  font-size: 14px;
+  background-color: #d1e9e9;
+
+  a {
+    i {
+      color: #00b5b8;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+}
+
+.modal-body-form {
+  background-color: #ffff;
+}

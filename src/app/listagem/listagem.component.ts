@@ -142,19 +142,6 @@ export class ListagemComponent {
     );
   }
 
-  editar(url: string, deviceObj: Device): void {
-    this.router.navigate([url, { id: deviceObj.id }]);
-  }
-
-  cadastrar(value: string): void {
-    this.router.navigateByUrl(value);
-  }
-
-  excluir(devices: Device, open: boolean): void {
-    this.dispositivoSelecionado.set(devices);
-    this.modalExclusao.set(open);
-  }
-
   onFecharModalExclusao() {
     this.modalExclusao.set(false);
     this.fetchParametros.update(params => ({ ...params }));
@@ -195,15 +182,9 @@ export class ListagemComponent {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  open(
-    action: string,
-    icon: string,
-    open: boolean,
-    device: Device | undefined
-  ): void {
+  open(action: string, open: boolean, device: Device | undefined): void {
     this.acao.set(action);
     this.device.set(device);
-    this.icon.set(icon);
 
     if (action === "Excluir") {
       this.modalExclusao.set(open);

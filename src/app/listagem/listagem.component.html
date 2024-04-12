@@ -8,7 +8,7 @@
           (changeFiltro)="onChangeFiltro($event)"></app-filtro>
         <button
           class="btn btn-cadastrar flex-grow-2 ms-2"
-          (click)="open('Cadastrar', 'fa-light fa-plus', true, undefined)">
+          (click)="open('Cadastrar', true, undefined)">
           <i class="fas fa-plus"></i>
           <span class="hidden-mobile ms-2"> Cadastrar </span>
         </button>
@@ -59,7 +59,8 @@
                     [margin]="-5"
                     [backgroundColor]="'#00b5b8'"
                     [color]="'#ffffff'"
-                    class="fa-stack fa-1x btn-editar">
+                    class="fa-stack fa-1x btn-editar"
+                    (click)="open('Editar', true, devices.item)">
                     <i class="fas fa-circle fa-stack-2x icone-primary"></i>
                     <i class="fas fa-edit fa-stack-1x fa-inverse"></i>
                   </a>
@@ -69,7 +70,7 @@
                     [margin]="-5"
                     [backgroundColor]="'#00b5b8'"
                     [color]="'#ffffff'"
-                    (click)="excluir(devices, true)">
+                    (click)="open('Excluir', true, devices.item)">
                     <span
                       [ngClass]="
                         devices.item.avaliacaoId !== '' ? 'disabled' : ''
@@ -108,4 +109,18 @@
   <app-cadastro
     [abrirModal]="modalCadastro"
     (fecharModal)="onFecharModal($event)"></app-cadastro>
+}
+
+@if (modalEdicao(); as modalEdicao) {
+  <app-edicao
+    [device]="device()"
+    [abrirModal]="modalEdicao"
+    (fecharModal)="onFecharModal($event)"></app-edicao>
+}
+
+@if (modalExclusao(); as modalExclusao) {
+  <app-exclusao
+    [device]="device()"
+    [abrirModal]="modalExclusao"
+    (fecharModal)="onFecharModal($event)"></app-exclusao>
 }

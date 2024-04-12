@@ -5,7 +5,7 @@
     class="modal fade"
     [ngClass]="open() ? 'show d-block' : 'hidden d-none'">
     <div
-      class="modal-dialog modal-lg modal-dialog border-0 modal-fullscreen-sm-down modal-fullscreen-md-down">
+      class="modal-dialog modal-lg modal-dialog-centered border-0 modal-fullscreen-sm-down modal-fullscreen-md-down">
       <div class="modal-content">
         <div class="modal-header">
           <div class="d-flex justify-content-between align-items-center">
@@ -13,7 +13,7 @@
               <i class="circle-primary fas fa-circle fa-stack-2x"></i>
               <i class="icone-primary fas fa-plus fa-stack-1x fa-inverse"></i>
             </span>
-            <h3 class="modal-title ml-1" id="modal-basic-title">Cadastrar</h3>
+            <h3 class="modal-title ms-2" id="modal-basic-title">Cadastrar</h3>
           </div>
           <button
             type="button"
@@ -22,7 +22,7 @@
             aria-label="Close"
             (click)="closeModal(false)"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body modal-body-form px-5">
           <form [formGroup]="deviceForm" class="mt-3">
             <div class="form-floating w-100 mb-3">
               <input
@@ -92,12 +92,12 @@
               </div>
 
               @if (comandosSelecionados) {
-                <div class="mt-4">
-                  <ul class="list-group list-group-flush">
+                <div class="mt-4 w-50">
+                  <ul class="list-group">
                     @for (item of comandosSelecionados; track $index) {
                       <li
-                        class="list-group-item d-flex align-items-center justify-content-between">
-                        <span>{{ item.description }}</span>
+                        class="list-group-item d-flex align-items-center justify-content-between mb-1">
+                        <span class="me-2">{{ item.description }}</span>
                         <a (click)="removeComando($index)">
                           <i class="fa-solid fa-xmark"></i
                         ></a>
@@ -130,4 +130,13 @@
       </div>
     </div>
   </div>
+}
+
+@if (modalConfirmacao()) {
+  <app-confirmacao-envio
+    [open]="modalConfirmacao()"
+    [mensagem]="mensagemModalConfirmacao"
+    [tipoModal]="tipoModalConfirmacao"
+    (fecharModal)="closeModal($event)">
+  </app-confirmacao-envio>
 }

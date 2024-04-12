@@ -22,7 +22,7 @@ import { UsuarioLogado } from "../interfaces/usuarioLogado";
 export class HomeComponent {
   sidebarService = inject(SidebarService);
   sidebarOpen = signal<boolean>(false);
-  usuarioLogado!: UsuarioLogado;
+  usuarioLogado = signal<UsuarioLogado | undefined>(undefined);
 
   showDropdown = signal<boolean>(false);
 
@@ -35,11 +35,9 @@ export class HomeComponent {
     if (localStorage) {
       const localUser = localStorage.getItem("usuarioLogado");
       if (localUser != null) {
-        this.usuarioLogado = JSON.parse(localUser);
+        this.usuarioLogado.set(JSON.parse(localUser));
       }
     }
-
-    // effect(() => console.log(this.sidebarOpen()));
   }
 
   onLogoff() {

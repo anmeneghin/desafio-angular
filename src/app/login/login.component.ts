@@ -98,7 +98,7 @@ export class LoginComponent {
           user.email == this.loginForm.get("email")?.getRawValue() &&
           user.senha == this.loginForm.get("senha")?.getRawValue()
       );
-      console.log(this.loginForm.get("email"));
+
       if (isUserPresent != undefined) {
         alert("Usuário Logado...");
         localStorage.setItem("usuarioLogado", JSON.stringify(isUserPresent));

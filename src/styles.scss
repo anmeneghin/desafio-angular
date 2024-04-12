@@ -11,7 +11,7 @@
 }
 
 .icone-danger {
-  color: rgb(229, 60, 83);
+  color: #E63C53;
 }
 
 .icone-primary {
@@ -24,7 +24,7 @@
 }
 
 .circle-danger {
-  color: #00b5b8;
+  color: #E63C53;
   opacity: 0.2;
 }
 
@@ -40,4 +40,13 @@
     background-color: #00CED2 !important;
     color: #FFF !important;
   }
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  background-color: #00b5b8;
+  border-color: #00B5B8;
+  color: #FFF;
+  cursor: not-allowed;
+  pointer-events: all !important;
 }

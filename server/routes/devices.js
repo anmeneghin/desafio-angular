@@ -41,7 +41,6 @@ router.get("/", (req, res) => {
   }
 
   if (req.query.pagina && req.query.limite) {
-    console.log("🚀 ~ file: server.js:93 ~ router.get ~ query:", req.query);
     const paginacao = getPaginacao(data, req.query.pagina, req.query.limite);
 
     res.json(paginacao);
@@ -81,7 +80,6 @@ router.get("/DeviceList", (req, res) => {
   }
 
   if (req.query.pagina && req.query.limite) {
-    console.log("🚀 ~ file: server.js:93 ~ router.get ~ query:", req.query);
     const paginacao = getPaginacao(data, req.query.pagina, req.query.limite);
 
     res.json(paginacao);
@@ -270,7 +268,6 @@ router.post("/Device", (req, res) => {
     const result = db.update(({ Device }) => Device.push(novoRegisto));
 
     res.json({ success: "Ok!", data: result });
-    res.json({ success: "Ok!" });
   }
 });
 
@@ -286,16 +283,12 @@ router.put("/Device/:id", (req, res) => {
   } else {
     const id = req.params.id;
 
-    const registroAlteradoId = db
-      .get("devices")
-      .find({ id: id })
-      .assign({ ...req.body })
-      .write().id;
-
-    const result = db.get("devices").find({ id: registroAlteradoId }).value();
-
-    res.json({ success: "Ok!", data: result });
-    // res.json({ success: "Ok!" });
+    for (var i = 0; i < db.data.Device.length; i++) {
+      if (db.data.Device[i].id === id) {
+        db.data.Device[i] = req.body;
+      }
+    }
+    res.json({ success: "Ok!", data: db.data });
   }
 });
 
@@ -307,8 +300,12 @@ router.delete("/Device/:id", (req, res) => {
   } else {
     const id = req.params.id;
 
-    db.get("devices").remove({ id: id }).write();
-    res.json({ success: "Ok!" });
+    for (var i = 0; i < db.data.Device.length; i++) {
+      if (db.data.Device[i].id === id) {
+        db.data.Device.splice(i, 1);
+      }
+    }
+    res.json({ success: "Ok!", data: db.data });
   }
 });
 

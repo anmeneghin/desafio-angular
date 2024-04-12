@@ -9,7 +9,9 @@
           data-bs-toggle="dropdown"
           aria-expanded="false">
           <i class="fa-solid fa-user-tie"></i>
-          <span class="ms-2">{{ usuarioLogado.nome }} </span>
+          @if (usuarioLogado(); as usuario) {
+            <span class="ms-2">{{ usuario.nome }} </span>
+          }
         </a>
         <ul class="dropdown-menu w-auto me-4">
           <li>
