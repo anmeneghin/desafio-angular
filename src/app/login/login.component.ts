@@ -104,7 +104,9 @@ export class LoginComponent {
         localStorage.setItem("usuarioLogado", JSON.stringify(isUserPresent));
         this.router.navigateByUrl("/home");
       } else {
-        alert("No User Found");
+        alert(
+          "As credenciais fornecidas pelo usuário são inexistentes ou inválidas"
+        );
       }
     }
   }

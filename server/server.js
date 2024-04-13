@@ -12,10 +12,10 @@ import * as devicesRoutes from "./routes/devices.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-var privateKey = fs.readFileSync(path.resolve(__dirname, "key.pem"), {
+var privateKey = fs.readFileSync(path.resolve(__dirname, "./key.pem"), {
   encoding: "utf8",
 });
-var certificate = fs.readFileSync(path.resolve(__dirname, "cert.pem"), {
+var certificate = fs.readFileSync(path.resolve(__dirname, "./cert.pem"), {
   encoding: "utf8",
 });
 
@@ -31,6 +31,7 @@ app.options(`*`, cors(), (req, res) => {
 app.use("/", cors(), devicesRoutes.default);
 
 app.use(cors(), (req, res, next) => {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
 
