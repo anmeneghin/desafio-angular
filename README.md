@@ -14,5 +14,5 @@ Para criar a identidade visual optei por cores claras por serem agradáveis visu
 
 ## Service
 
-Para o serviço local da aplicação, utilizei uma aplicação node server que apesar de ser usado como tecnologia back-end, pode ser usado no processo de desenvolvimento de front-end, o que posibilitou a simulação de uma api.
-Para o funcionamento da api, execute `node server/server.js`.
+Para o serviço da aplicação, utilizei uma aplicação [json server](https://github.com/typicode/json-server) que possibilita uma simulação de API REST.
+Para o funcionamento da api, fiz um deploy na aplicação cloud [render](https://render.com/), que pode ter o json conferido [aqui](https://json-server-iot.onrender.com/) ou então no [repositório](https://github.com/anmeneghin/json-server-iot).
