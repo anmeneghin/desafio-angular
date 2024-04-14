@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gerencimento-dispositivos-iot": {
+    "desafio-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gerencimento-dispositivos-iot:build:production"
+              "buildTarget": "desafio-angular:build:production"
             },
             "development": {
-              "buildTarget": "gerencimento-dispositivos-iot:build:development"
+              "buildTarget": "desafio-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "gerencimento-dispositivos-iot:build"
+            "buildTarget": "desafio-angular:build"
           }
         },
         "test": {

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  prefixApi: "https://anmeneghin.github.io/gerencimento-dispositivos-iot",
+  prefixApi: "https://json-server-iot.onrender.com",
 };

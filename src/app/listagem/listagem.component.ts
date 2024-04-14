@@ -16,7 +16,7 @@ import { SortDirective, SortEvent } from "../lista/sort.directive";
 import { ItensPorPaginaComponent } from "../lista/itens-por-pagina.component";
 import { PaginacaoComponent } from "../lista/paginacao.component";
 import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Subscription, catchError, filter, tap } from "rxjs";
 import { PaginacaoParametros } from "../lista/paginacao-parametros";
 import { Device } from "../interfaces/device";
 import { DevicePagina } from "../interfaces/device-pagina";
@@ -70,7 +70,7 @@ export class ListagemComponent {
     filtro: "",
     limite: 10,
     paginaAtual: 1,
-    campos: "description,manufacturer",
+    campos: "description",
   });
 
   corTema = signal<string | undefined>(undefined);
@@ -123,12 +123,32 @@ export class ListagemComponent {
             this.fetchParametros()?.sort?.ordem ?? "",
             this.fetchParametros()?.filtro,
             this.fetchParametros()?.campos
+          )      .pipe(
+            filter(res => res.status === 200),
+            tap(res => {
+              if (res.body) {
+                const count = res.headers.get("X-Total-Count");
+                const totalPagina = Math.ceil(Number(count) / this.fetchParametros().limite);
+    
+                this.dispositivoPagina.set({
+                  pagina: 1,
+                  de: 1,
+                  ate: this.fetchParametros().limite,
+                  paginaAnterior: null,
+                  proximaPagina: null,
+                  paginaAtual: this.fetchParametros().paginaAtual,
+                  primeiraPagina: 1,
+                  ultimaPagina: totalPagina,
+                  totalPaginas: totalPagina,
+                  totalItens: Number(count),
+                  itens: res.body,
+                });
+              }
+            }),
+    
+            catchError(async err => console.log(err))
           )
-          .subscribe({
-            next: pagina => {
-              this.dispositivoPagina.set(pagina);
-            },
-          });
+          .subscribe();
       }
     });
 
@@ -167,7 +187,7 @@ export class ListagemComponent {
   onChangeFiltro($event: string | null) {
     this.fetchParametros.update(params => ({
       ...params,
-      ...{ filtro: $event, paginaAtual: 1, campos: "description,manufacturer" },
+      ...{ filtro: $event, paginaAtual: 1, campos: "description" },
     }));
   }
 

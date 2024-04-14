@@ -112,6 +112,9 @@ devDependencies:
   '@angular/compiler-cli':
     specifier: ^17.3.1
     version: 17.3.4(@angular/compiler@17.3.4)(typescript@5.3.3)
+  '@babel/plugin-syntax-import-attributes':
+    specifier: ^7.24.1
+    version: 7.24.1(@babel/core@7.24.0)
   '@types/eslint':
     specifier: ^8
     version: 8.56.9

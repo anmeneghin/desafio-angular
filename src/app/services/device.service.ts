@@ -23,23 +23,25 @@ export class DeviceService {
     ordem: string | null,
     filtro: string | null,
     campos: string | null
-  ): Observable<DevicePagina> {
+  ): Observable<HttpResponse<Device[]>>{
     const url =
       this.API_DEVICE +
-      "?pagina=" +
+      "?_page=" +
       pagina +
-      "&limite=" +
+      "&_limit=" +
       limite +
-      "&sort=" +
+      "&_sort=" +
       sort +
-      "&ordem=" +
+      "&_order=" +
       ordem +
-      "&filtro=" +
-      filtro +
-      "&campos=" +
-      campos;
+      "&" +
+      campos +
+      "_like=" +
+      filtro;
 
-    return this.httpService.get<DevicePagina>(url);
+    return this.httpService.get<Device[]>(url, {
+      observe: "response",
+    });
   }
 
   listarDescricaoComandos(): Observable<HttpResponse<CommandDescription[]>> {
