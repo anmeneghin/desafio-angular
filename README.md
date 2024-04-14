@@ -1,15 +1,15 @@
-# DesafioAngular
+# Community IoT Device Aplicação
 
 Projeto Angular versão 17.3.2.
 
-Projeto disponivel em [Gerenciamento dispositivos iot](https://anmeneghin.github.io/gerencimento-dispositivos-iot/).
+Projeto disponível em [Gerenciamento dispositivos iot](https://anmeneghin.github.io/gerencimento-dispositivos-iot/).
 Publicado pelo gihub pages.
 
 ## Desenvolvimento
 
 Para o gerenciamento de pacotes do projeto, utilizei o gerenciador [pnpm](https://pnpm.io/pt/)., que tem vantagem sobre o npm pois economiza uma enorme quantidade de espaço em disco, leva menos tempo para instalar os pacotes e possui suporte embutido para repositórios mono.
 
-Para executar o projeto localmente, use o comando `pnpm start` , após instalar suas dependencias.
+Para executar o projeto localmente, use o comando `pnpm start` , após instalar suas dependências.
 
 Na estilização do site optei por usar o [Bootstrap](https://getbootstrap.com/) por ser uma ferramenta que agiliza o desenvolvimento e promove flexibilidade e responsividade.
 
