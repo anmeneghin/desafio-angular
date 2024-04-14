@@ -43,13 +43,17 @@
             class="form-control"
             type="email"
             name="email"
+            [email]="true"
             formControlName="email"
             placeholder="Email"
             [ngClass]="{
               'is-invalid': isInputValid('email', 'cadastroForm')
             }" />
           <label class="label-input" for="name">Email</label>
-          <div class="invalid-feedback">O campo email é obrigatório!</div>
+          <div class="invalid-feedback">
+            Campo email deve conter um endereço de email válido. Ex.:
+            abc&#64;abc.com
+          </div>
         </div>
         <div class="form-floating w-100 mb-3">
           <input
