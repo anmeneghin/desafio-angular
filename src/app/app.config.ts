@@ -1,17 +1,32 @@
-import { ApplicationConfig } from "@angular/core";
-import { provideRouter } from "@angular/router";
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
-import { routes } from "./app.routes";
-import { provideClientHydration } from "@angular/platform-browser";
-import { APP_BASE_HREF } from "@angular/common";
-import { provideHttpClient, withFetch } from "@angular/common/http";
-import { provideAnimations } from "@angular/platform-browser/animations";
+import { routes } from './app.routes';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: APP_BASE_HREF, useValue: "/" },
+    importProvidersFrom(
+      BrowserModule,
+      FormsModule,
+      ReactiveFormsModule,
+      CommonModule,
+      BrowserAnimationsModule
+    ),
+    DatePipe,
+    provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
-    provideHttpClient(withFetch()),
-    provideAnimations(),
+    provideClientHydration(),
   ],
 };
