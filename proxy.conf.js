@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
   {
     context: ["/Device"],
-    target: "http://localhost:3000/",
+    target: "https://anmeneghin.github.io/gerencimento-dispositivos-iot",
     secure: false,
     logLevel: "debug",
     pathRewrite: { "^/api": "" },

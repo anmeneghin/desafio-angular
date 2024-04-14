@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  prefixApi: "https://localhost:3000",
+  prefixApi: "https://anmeneghin.github.io/gerencimento-dispositivos-iot",
 };

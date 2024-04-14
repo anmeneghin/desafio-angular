@@ -1,5 +1,5 @@
 {
-  "name": "desafio-angular",
+  "name": "gerencimento-dispositivos-iot",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:desafio-angular": "node dist/desafio-angular/server/server.mjs"
+    "serve:ssr:gerencimento-dispositivos-iot": "node dist/gerencimento-dispositivos-iot/server/server.mjs"
   },
   "private": true,
   "dependencies": {
