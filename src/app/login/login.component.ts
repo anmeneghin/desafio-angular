@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, signal } from "@angular/core";
 import {
   AbstractControl,
   FormControl,
@@ -10,6 +10,7 @@ import {
 } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { Router } from "@angular/router";
+import { ConfirmacaoEnvioComponent } from "../confirmacao-envio/confirmacao-envio.component";
 
 export class LoginModel {
   email: string;
@@ -36,7 +37,12 @@ export class SignUpModel {
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ConfirmacaoEnvioComponent,
+  ],
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.scss",
 })
@@ -45,6 +51,10 @@ export class LoginComponent {
 
   signUpObj: SignUpModel = new SignUpModel();
   loginObj: LoginModel = new LoginModel();
+
+  modalConfirmacao = signal<boolean>(false);
+  mensagemModalConfirmacao!: string;
+  tipoModalConfirmacao!: string;
 
   cadastroForm = new FormGroup({
     nome: new FormControl<string>("", {
@@ -74,6 +84,12 @@ export class LoginComponent {
 
   constructor(private router: Router) {}
 
+  mostrarModalConfirmacao(mensagem: string, open: boolean, tipoModal: string) {
+    this.mensagemModalConfirmacao = mensagem;
+    this.modalConfirmacao.set(open);
+    this.tipoModalConfirmacao = tipoModal;
+  }
+
   onRegister() {
     const localUser = localStorage.getItem("usuarios");
     if (localUser != null) {
@@ -85,7 +101,13 @@ export class LoginComponent {
       users.push(this.cadastroForm.value);
       localStorage.setItem("usuarios", JSON.stringify(users));
     }
-    alert("Registration Success");
+    this.mostrarModalConfirmacao(
+      "Usuário cadastrado com sucesso!",
+      true,
+      "sucesso-concluido"
+    );
+
+    this.showCadastroForm();
   }
 
   onLogin() {
@@ -100,12 +122,20 @@ export class LoginComponent {
       );
 
       if (isUserPresent != undefined) {
-        alert("Usuário Logado...");
-        localStorage.setItem("usuarioLogado", JSON.stringify(isUserPresent));
-        this.router.navigateByUrl("/home");
+        this.mostrarModalConfirmacao(
+          "Usuário logado",
+          true,
+          "sucesso-concluido"
+        );
+        setTimeout(() => {
+          localStorage.setItem("usuarioLogado", JSON.stringify(isUserPresent));
+          this.router.navigateByUrl("/home");
+        }, 1000);
       } else {
-        alert(
-          "As credenciais fornecidas pelo usuário são inexistentes ou inválidas"
+        this.mostrarModalConfirmacao(
+          "As credenciais fornecidas pelo usuário são inexistentes ou inválidas",
+          true,
+          "falha"
         );
       }
     }

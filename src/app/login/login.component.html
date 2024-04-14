@@ -145,3 +145,12 @@
     </div>
   </div>
 </div>
+
+@if (modalConfirmacao()) {
+  <app-confirmacao-envio
+    [open]="modalConfirmacao()"
+    [mensagem]="mensagemModalConfirmacao"
+    [tipoModal]="tipoModalConfirmacao"
+    (fecharModal)="modalConfirmacao.set($event)">
+  </app-confirmacao-envio>
+}
