@@ -1,27 +1,18 @@
 # DesafioAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+Projeto Angular versão 17.3.2.
 
-## Development server
+## Desenvolvimento
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Para o gerenciamento de pacotes do projeto, utilizei o gerenciador [pnpm](https://pnpm.io/pt/)., que tem vantagem sobre o npm pois economiza uma enorme quantidade de espaço em disco, leva menos tempo para instalar os pacotes e possui suporte embutido para repositórios mono.
 
-## Code scaffolding
+Para executar o projeto localmente, use o comando `pnpm start` , após instalar suas dependencias.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Na estilização do site optei por usar o [Bootstrap](https://getbootstrap.com/) por ser uma ferramenta que agiliza o desenvolvimento e promove flexibilidade e responsividade.
 
-## Build
+Para criar a identidade visual optei por cores claras por serem agradáveis visualmente, usei animações para trazer modernidade à aplicação e utilizei de um design simples e objetivo para que o usuário não se perca nas suas tomadas de decisões e consiga usar a aplicação facilmente em qualquer dispositivo devido a responsividade presente na aplicação.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Service
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para o serviço local da aplicação, utilizei uma aplicação node server que apesar de ser usado como tecnologia back-end, pode ser usado no processo de desenvolvimento de front-end, o que posibilitou a simulação de uma api.
+Para o funcionamento da api, execute `node server/server.js`.

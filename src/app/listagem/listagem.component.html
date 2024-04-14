@@ -1,6 +1,6 @@
 <div class="d-flex">
   <div class="card card-home w-100 px-4 py-3">
-    <h4 class="card-title">Devices</h4>
+    <h4 class="card-title">Dispositivos</h4>
     <div class="card-body">
       <div class="d-flex justify-content-between">
         <app-filtro
@@ -10,11 +10,11 @@
           class="btn btn-cadastrar flex-grow-2 ms-2"
           (click)="open('Cadastrar', true, undefined)">
           <i class="fas fa-plus"></i>
-          <span class="hidden-mobile ms-2"> Cadastrar </span>
+          <span class="d-none d-md-inline ms-2"> Cadastrar </span>
         </button>
       </div>
 
-      <div class="tabela-radius d-none d-sm-block mt-4">
+      <div class="tabela-radius mt-4">
         @defer (when devices()) {
           <app-lista [itens]="devices()">
             <ng-template #thead>
